@@ -22,6 +22,7 @@ pipeline{
         }
         stage('Deploy'){
             steps{
+                withAWS(credentials: 'AWS', region: ${AWS_DEFAULT_REGION}){
                 script {
                     def instanceDetails = sh(script: '''aws ec2 run-instances \
                             --image-id ami-03f4878755434977f \
@@ -38,6 +39,7 @@ pipeline{
 
                     echo "EC2 instance launched with ID: $instanceId"
                     echo "Public IP Address: $publicIpAddress"
+                }
                 }
             }
         }
