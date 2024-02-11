@@ -26,7 +26,7 @@ pipeline{
                 script {
                     def instanceDetails = sh(script: '''aws ec2 run-instances \
                             --image-id ami-03f4878755434977f \
-                            --instance-type t2.micro \
+                            --instance-type t3.micro \
                             --key-name ec2 \
                             --security-group-ids sg-09e0c5dd41f4bd5b9 \
                             --subnet-id subnet-076051ff9276a558d \
