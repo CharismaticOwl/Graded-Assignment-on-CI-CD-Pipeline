@@ -7,5 +7,10 @@ pipeline{
                     url: 'https://github.com/CharismaticOwl/Graded-Assignment-on-CI-CD-Pipeline.git'
             }
         }
+        stage('run python code'){
+            steps{
+                sh 'python app.py'
+            }
+        }
     }
 }
