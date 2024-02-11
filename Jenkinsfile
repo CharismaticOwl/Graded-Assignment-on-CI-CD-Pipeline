@@ -31,7 +31,7 @@ pipeline{
                             --subnet-id subnet-076051ff9276a558d \
                             --query 'Instances[0].[InstanceId,PublicIpAddress]' \
                             --output text
-                    ''', returnStdout: true().trim().split()
+                    ''', returnStdout: true).trim().split()
 
                     def instanceId = instanceDetails[0]
                     def publicIpAddress = instanceDetails[1]
