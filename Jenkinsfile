@@ -3,8 +3,7 @@ pipeline{
     stages{
         stage('clone the repo'){
             steps{
-                git branch: 'Jenkins',
-                    url: 'https://github.com/CharismaticOwl/Graded-Assignment-on-CI-CD-Pipeline.git'
+                checkout scm
             }
         }
         stage('run python code'){
