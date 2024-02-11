@@ -9,6 +9,7 @@ pipeline{
         }
         stage('run python code'){
             steps{
+                sh 'sudo apt install python -y'
                 sh 'python app.py'
             }
         }
