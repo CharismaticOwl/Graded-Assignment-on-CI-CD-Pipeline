@@ -14,12 +14,12 @@ pipeline{
         }
         stage('test the python script'){
             steps{
-                sh 'python test_hello.py'
+                sh 'python3 test_hello.py'
             }
         }
         stage('run the app'){
             steps{
-                sh 'python hello.py'
+                sh 'python3 hello.py'
             }
         }
     }
