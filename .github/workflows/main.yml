@@ -43,6 +43,7 @@ jobs:
           instance-type: "t3.micro"
           instance-profile: "ec2-service-role-admin"
           region: "ap-south-1"
+          terminate-on-post: false
           user-data: |
             #!/bin/bash
             sudo apt update --fix-missing
