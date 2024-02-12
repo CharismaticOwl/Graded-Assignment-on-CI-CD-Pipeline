@@ -1,5 +1,5 @@
 name: Simple-Python-code-pipeline
-on: workflow_dispatch
+on: pull_request
 jobs:
   Testing:
     runs-on: ubuntu-latest
