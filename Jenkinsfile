@@ -30,7 +30,7 @@ pipeline{
                                 --key-name ec2 \
                                 --security-group-ids sg-09e0c5dd41f4bd5b9 \
                                 --subnet-id subnet-076051ff9276a558d \
-                                --userdata ./userdata_for_deploy.sh \
+                                --user-data ./userdata_for_deploy.sh \
                                 --query 'Instances[0].[InstanceId,PublicIpAddress]' \
                                 --output text
                         ''', returnStdout: true).trim().split()
