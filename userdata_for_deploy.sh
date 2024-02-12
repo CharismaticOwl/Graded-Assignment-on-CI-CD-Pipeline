@@ -16,7 +16,9 @@ sudo pm2 start app.py --interpreter=python3
 
 sudo ufw allow 3000
 
-cat << EOT > default
+touch default
+
+cat  > default << EOT
 server {
     listen 80;
     listen [::]:80;

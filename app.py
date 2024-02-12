@@ -1,8 +1,11 @@
 # hello.py
+# import librabries - flask
 from flask import Flask
 
+# instantialting app
 app = Flask(__name__)
 
+# defining a route
 @app.route('/')
 def hello():
     return 'Hello, World!'
