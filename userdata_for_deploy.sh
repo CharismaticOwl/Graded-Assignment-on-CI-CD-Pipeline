@@ -10,7 +10,31 @@ cd Graded-Assignment-on-CI-CD-Pipeline
 
 sudo pip install -r requirements.txt
 
-gunicorn --bind 0.0.0.0:3000 run:app
+sudo apt install gunicorn
+
+gunicorn -b 0.0.0.0:3000 app:app
+
+cat <<EOT > hello.service
+
+[Unit]
+Description=simple hello app
+After=network.target
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/Graded-Assignment-on-CI-CD-Pipeline
+ExecStart=/Graded-Assignment-on-CI-CD-Pipeline -b localhost:3000 app:app
+Restart=always
+[Install]
+WantedBy=multi-user.target
+
+EOT
+
+sudo mv hello.service /etc/systemd/system/hello.service
+
+sudo systemctl daemon-reload
+sudo systemctl start hello
+sudo systemctl enable hello
 
 sudo systemctl enable nginx
 
