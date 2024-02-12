@@ -32,3 +32,39 @@ jobs:
       
       - name: Testing aws credentials
         run: aws sts get-caller-identity
+
+      - name: Launch ec2 and deploy the app
+        id: ec2-arm64
+        uses: truemark/aws-ec2-run-instance-action@v5
+        with:
+          security-group-id: "sg-09e0c5dd41f4bd5b9"
+          subnet-id: "subnet-076051ff9276a558d"
+          image-id: "ami-03f4878755434977f"
+          instance-type: "t3.micro"
+          region: "ap-south-1"
+          user-data: |
+            #!/bin/bash
+            sudo apt update --fix-missing
+            sudo apt install git python3 pip nginx npm -y
+            git clone -b Jenkins https://github.com/CharismaticOwl/Graded-Assignment-on-CI-CD-Pipeline.git
+            cd Graded-Assignment-on-CI-CD-Pipeline
+            sudo pip install -r requirements.txt
+            sudo npm install pm2 -g
+            sudo pm2 start app.py --interpreter=python3
+            sudo ufw allow 3000
+            touch default
+            cat  > default << EOT
+            server {
+                listen 80;
+                listen [::]:80;
+          
+                server_name python_app;
+                  
+                location / {
+                    proxy_pass http://localhost:3000;
+                }
+            }
+            EOT
+            sudo rm -rf /etc/nginx/sites-enabled/*
+            sudo cp default /etc/nginx/sites-enabled/default
+            sudo systemctl restart nginx
