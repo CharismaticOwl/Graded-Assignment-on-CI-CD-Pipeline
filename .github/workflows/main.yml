@@ -41,6 +41,7 @@ jobs:
           subnet-id: "subnet-076051ff9276a558d"
           image-id: "ami-03f4878755434977f"
           instance-type: "t3.micro"
+          instance-profile: "ec2-service-role-admin"
           region: "ap-south-1"
           user-data: |
             #!/bin/bash
