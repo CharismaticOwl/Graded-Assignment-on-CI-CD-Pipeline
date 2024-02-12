@@ -15,3 +15,23 @@ sudo npm install pm2 -g
 sudo pm2 start app.py --interpreter=python3
 
 sudo ufw allow 3000
+
+cat << EOT > default
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name python_app;
+        
+    location / {
+        proxy_pass http://localhost:3000;
+    }
+}
+
+EOT
+
+sudo rm -rf /etc/nginx/sites-enabled/*
+
+sudo cp default /etc/nginx/sites-enabled/default
+
+sudo systemctl restart nginx
