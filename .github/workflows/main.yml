@@ -22,4 +22,5 @@ jobs:
     needs: Testing
     runs-on: ubuntu-latest
     steps:
-      - name:
+      - name: deploy the app to Ec2
+        run: echo 'Work in progress'
